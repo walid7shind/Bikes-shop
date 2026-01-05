@@ -2,8 +2,9 @@ export interface Bike {
   id: number;
   name: string;
   price: number;
-  category: string;
+  category?: string;
   description: string;
-  inStock: number;
+  inStock?: number;
   discountPercent?: number;
+  type: 'bike';
 }

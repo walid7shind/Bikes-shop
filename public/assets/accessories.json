@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Casque vélo Urban Safe",
+    "description": "Casque léger et ventilé offrant une excellente protection pour les trajets urbains.",
+    "price": 59.99
+  },
+  {
+    "name": "Antivol en U renforcé",
+    "description": "Antivol en acier trempé résistant aux coupures, idéal pour sécuriser votre vélo en ville.",
+    "price": 39.90
+  },
+  {
+    "name": "Kit d’éclairage LED avant/arrière",
+    "description": "Éclairage LED rechargeable par USB pour une visibilité optimale de nuit.",
+    "price": 24.50
+  },
+  {
+    "name": "Pompe à vélo haute pression",
+    "description": "Pompe compacte avec manomètre intégré, compatible valves Presta et Schrader.",
+    "price": 29.00
+  },
+  {
+    "name": "Sacoche de selle étanche",
+    "description": "Sacoche résistante à l’eau pour transporter outils et effets personnels.",
+    "price": 19.99
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "bikes": [
+    {
+      "name": "Vélo de route Carbon Pro",
+      "category": "bike",
+      "description": "Vélo de route léger en carbone, idéal pour les longues distances et la compétition.",
+      "price": 2499.99
+    },
+    {
+      "name": "VTT Trail Explorer",
+      "category": "bike",
+      "description": "VTT tout-suspendu conçu pour les sentiers techniques et les terrains accidentés.",
+      "price": 1799.50
+    },
+    {
+      "name": "Vélo électrique Urban City",
+      "category": "bike",
+      "description": "Vélo électrique confortable pour les déplacements urbains quotidiens.",
+      "price": 2190.00
+    },
+    {
+      "name": "Gravel Adventure X",
+      "category": "bike",
+      "description": "Vélo gravel polyvalent, adapté aussi bien à la route qu’aux chemins.",
+      "price": 1599.00
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+<h2>Contact us</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>Email*</label>
+  <input type="email" formControlName="email">
+  <small *ngIf="emailCtrl?.invalid && emailCtrl?.touched" class="error">Enter a valid email.</small>
+
+  <label>Message*</label>
+  <textarea rows="4" formControlName="message"></textarea>
+  <small *ngIf="messageCtrl?.invalid && messageCtrl?.touched" class="error">Message must be at least 10 characters.</small>
+
+  <button type="submit">Send</button>
+</form>
+
+<div *ngIf="submitted">
+  <p>We have captured your request.</p>
+  <p><strong>Email:</strong> {{ submitted.email }}</p>
+  <p><strong>Message:</strong> {{ submitted.message }}</p>
+</div>

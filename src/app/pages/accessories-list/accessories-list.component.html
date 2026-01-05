@@ -1,0 +1,13 @@
+<h2>Accessories</h2>
+
+<div *ngIf="loading">Loading...</div>
+<p>Accessories count: {{ accessories.length }}</p>
+<div class="grid" *ngIf="!loading">
+  <div class="card" *ngFor="let a of accessories">
+    <h3>{{ a.name }}</h3>
+    <p class="desc">{{ a.description }}</p>
+    <p class="price">Price: {{ a.price }} €</p>
+    <button (click)="onAddToCart(a)" [disabled]="a.inStock !== undefined && a.inStock <= 0">Add to cart</button>
+    <p *ngIf="a.inStock !== undefined">Stock: {{ a.inStock }}</p>
+  </div>
+</div>

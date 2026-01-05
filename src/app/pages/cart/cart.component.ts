@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { BikeService } from '../../services/bike.service';
 import { CartLine } from '../../models/cart.model';
+import { ProductType } from '../../models/product.model';
 
 @Component({
   selector: 'app-cart',
@@ -22,18 +23,21 @@ export class CartComponent {
   }
 
   price(line: CartLine): number {
-    return this.bikeService.finalPrice(line.bike) * line.qty;
+    if (line.product.type === 'bike') {
+      return this.bikeService.finalPrice(line.product) * line.qty;
+    }
+    return line.product.price * line.qty;
   }
 
   total(): number {
     return this.lines.reduce((sum, l) => sum + this.price(l), 0);
   }
 
-  remove(id: number): void {
-    this.cartService.remove(id);
+  remove(id: number, type: ProductType): void {
+    this.cartService.remove({ id, type });
   }
 
-  changeQty(id: number, value: string): void {
-    this.cartService.updateQty(id, Number(value));
+  changeQty(id: number, type: ProductType, value: string): void {
+    this.cartService.updateQty({ id, type }, Number(value));
   }
 }

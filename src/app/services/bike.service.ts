@@ -1,14 +1,39 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Bike } from '../models/bike.model';
 
+type BikeApi = {
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+};
+
 @Injectable({ providedIn: 'root' })
 export class BikeService {
-  // In the course you had "retrieveProducts()": same idea here.
+  private readonly bikesUrl = '/assets/bikes.json';
+
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: object) {}
+
   retrieveBikes(): Observable<Bike[]> {
-    // We keep it local to stay within slides scope (no backend required).
-    return of(this.seedBikes());
+    if (!isPlatformBrowser(this.platformId)) {
+      return of([]);
+    }
+    return this.http.get<{ bikes: BikeApi[] }>(this.bikesUrl).pipe(
+      map(payload =>
+        (payload?.bikes ?? []).map((b, idx) => ({
+          id: idx + 1,
+          name: b.name,
+          price: b.price,
+          category: b.category,
+          description: b.description,
+          type: 'bike' as const,
+        }))
+      ),
+    );
   }
 
   getBikeById(id: number): Observable<Bike | undefined> {
@@ -17,7 +42,6 @@ export class BikeService {
     );
   }
 
-  // Example of "operator" usage (filter)
   searchByMaxPrice(max: number): Observable<Bike[]> {
     return this.retrieveBikes().pipe(
       map(bikes => bikes.filter(b => this.finalPrice(b) <= max))
@@ -27,15 +51,5 @@ export class BikeService {
   finalPrice(b: Bike): number {
     const d = b.discountPercent ?? 0;
     return Math.round((b.price * (1 - d / 100)) * 100) / 100;
-  }
-
-  private seedBikes(): Bike[] {
-    return [
-      { id: 1, name: 'Aero Road 300', price: 1200, category: 'Road', discountPercent: 10, inStock: 5, description: 'Fast road bike.' },
-      { id: 2, name: 'Mountain Pro X', price: 1500, category: 'MTB', inStock: 3, description: 'Trail / enduro ready.' },
-      { id: 3, name: 'City Comfort', price: 550, category: 'City', discountPercent: 5, inStock: 12, description: 'Daily commute bike.' },
-      { id: 4, name: 'Gravel Explorer', price: 980, category: 'Gravel', inStock: 7, description: 'Mixed terrain bike.' },
-      { id: 5, name: 'E-Bike Volt', price: 2200, category: 'Electric', inStock: 2, description: 'Electric assist bike.' },
-    ];
   }
 }

@@ -1,28 +1,34 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Bike } from '../models/bike.model';
-import { CartLine } from '../models/cart.model';
+import { CartLine, CartUpdateKey } from '../models/cart.model';
+import { Product } from '../models/product.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly cartSubject = new BehaviorSubject<CartLine[]>([]);
   cart$: Observable<CartLine[]> = this.cartSubject.asObservable();
 
-  add(bike: Bike, qty: number = 1): void {
+  add(product: Product, qty: number = 1): void {
     const lines = this.cartSubject.getValue();
-    const existing = lines.find(l => l.bike.id === bike.id);
+    const existing = lines.find(l => l.product.id === product.id && l.product.type === product.type);
 
     let next: CartLine[];
     if (existing) {
-      next = lines.map(l => l.bike.id === bike.id ? { ...l, qty: l.qty + qty } : l);
+      next = lines.map(l =>
+        l.product.id === product.id && l.product.type === product.type
+          ? { ...l, qty: l.qty + qty }
+          : l
+      );
     } else {
-      next = [...lines, { bike, qty }];
+      next = [...lines, { product, qty }];
     }
     this.cartSubject.next(next);
   }
 
-  remove(bikeId: number): void {
-    const next = this.cartSubject.getValue().filter(l => l.bike.id !== bikeId);
+  remove(key: CartUpdateKey): void {
+    const next = this.cartSubject
+      .getValue()
+      .filter(l => !(l.product.id === key.id && l.product.type === key.type));
     this.cartSubject.next(next);
   }
 
@@ -30,9 +36,9 @@ export class CartService {
     this.cartSubject.next([]);
   }
 
-  updateQty(bikeId: number, qty: number): void {
+  updateQty(key: CartUpdateKey, qty: number): void {
     const next = this.cartSubject.getValue().map(l => {
-      if (l.bike.id !== bikeId) return l;
+      if (l.product.id !== key.id || l.product.type !== key.type) return l;
       return { ...l, qty: Math.max(1, qty) };
     });
     this.cartSubject.next(next);

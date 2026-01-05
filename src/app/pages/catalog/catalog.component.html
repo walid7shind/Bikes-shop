@@ -1,0 +1,44 @@
+<section class="catalog">
+  <header>
+    <h2>Catalog</h2>
+    <p *ngIf="!loading">Showing {{ filtered.length }} of {{ products.length }} products</p>
+  </header>
+
+  <div class="filters" *ngIf="!loading">
+    <label>
+      Type
+      <select [(ngModel)]="filterType" (ngModelChange)="onFiltersChange()">
+        <option value="all">All</option>
+        <option value="bike">Bikes</option>
+        <option value="accessory">Accessories</option>
+      </select>
+    </label>
+
+    <label>
+      Max price
+      <input type="number" [(ngModel)]="maxPrice" (ngModelChange)="onFiltersChange()" min="0" step="0.01" placeholder="No limit">
+    </label>
+
+    <label>
+      Name contains
+      <input type="text" [(ngModel)]="searchName" (ngModelChange)="onFiltersChange()" placeholder="Optional">
+    </label>
+
+    <button type="button" (click)="resetFilters()">Clear filters</button>
+  </div>
+
+  <div *ngIf="loading">Loading catalog...</div>
+  <div *ngIf="errorMessage && !loading" class="error">{{ errorMessage }}</div>
+
+  <div class="grid" *ngIf="!loading && !errorMessage">
+    <div class="card" *ngFor="let p of filtered">
+      <div class="card__head">
+        <span class="badge" [ngClass]="p.type">{{ p.type }}</span>
+        <strong class="price">{{ p.price | number:'1.2-2' }} €</strong>
+      </div>
+      <h3>{{ p.name }}</h3>
+      <p class="desc">{{ p.description }}</p>
+      <button (click)="addToCart(p)">Add to cart</button>
+    </div>
+  </div>
+</section>
