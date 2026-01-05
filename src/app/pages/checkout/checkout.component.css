@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+h2 {
+  margin: 0 0 12px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: 600;
+  color: #111827;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+button {
+  align-self: flex-start;
+  padding: 8px 12px;
+  border: 1px solid #10b981;
+  background: #10b981;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:disabled {
+  background: #cbd5e1;
+  border-color: #cbd5e1;
+  color: #475569;
+  cursor: not-allowed;
+}
+
+p {
+  margin: 12px 0 0;
+  color: #047857;
+  font-weight: 600;
+}

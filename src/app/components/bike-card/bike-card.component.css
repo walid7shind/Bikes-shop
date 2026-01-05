@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+div {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+div.discounted {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1d4ed8;
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  color: #374151;
+}
+
+button {
+  align-self: flex-start;
+  padding: 8px 12px;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:disabled {
+  background: #cbd5e1;
+  border-color: #cbd5e1;
+  color: #475569;
+  cursor: not-allowed;
+}

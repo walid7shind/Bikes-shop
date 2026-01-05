@@ -1,0 +1,22 @@
+<h2>Checkout</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>FirstName*</label>
+  <input type="text" formControlName="firstName">
+
+  <label>LastName*</label>
+  <input type="text" formControlName="lastName">
+
+  <label>Mail*</label>
+  <input type="text" formControlName="mail">
+
+  <label>Phone</label>
+  <input type="text" formControlName="phone">
+
+  <button type="submit" [disabled]="!form.valid">Pay</button>
+</form>
+
+<div *ngIf="done">
+  <p>Order done.</p>
+  <button (click)="back()">Back to bikes</button>
+</div>

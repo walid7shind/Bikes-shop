@@ -1,0 +1,23 @@
+<h2>Cart</h2>
+
+<div *ngIf="lines.length === 0">
+  <p>Your cart is empty.</p>
+  <a routerLink="/bikes">Go to bikes</a>
+</div>
+
+<div *ngIf="lines.length > 0">
+  <div *ngFor="let l of lines">
+    <p>
+      {{ l.bike.name }} |
+      qty:
+      <input type="number" [value]="l.qty" (input)="changeQty(l.bike.id, $event.target.value)">
+      |
+      line total: {{ price(l) }} €
+    </p>
+    <button (click)="remove(l.bike.id)">Remove</button>
+  </div>
+
+  <h3>Total: {{ total() }} €</h3>
+
+  <a routerLink="/checkout">Checkout</a>
+</div>

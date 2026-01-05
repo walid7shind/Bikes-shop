@@ -1,0 +1,17 @@
+<a routerLink="/bikes">Back to list</a>
+
+<div *ngIf="bike">
+  <h2>{{ bike.name }}</h2>
+  <p>{{ bike.description }}</p>
+  <p>Category: {{ bike.category }}</p>
+  <p>Stock: {{ bike.inStock }}</p>
+  <p>Final price: {{ finalPrice() }} €</p>
+
+  <button (click)="add()" [disabled]="bike.inStock <= 0">
+    Add to cart
+  </button>
+</div>
+
+<div *ngIf="!bike">
+  <p>Bike not found.</p>
+</div>

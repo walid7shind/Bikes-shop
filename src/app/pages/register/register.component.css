@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+h2 {
+  margin: 0 0 12px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: 600;
+  color: #111827;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+button {
+  align-self: flex-start;
+  padding: 8px 12px;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+p {
+  margin: 8px 0 0;
+  color: #374151;
+}
+
+p:first-of-type {
+  color: #dc2626;
+}
+
+p:last-of-type {
+  color: #047857;
+}

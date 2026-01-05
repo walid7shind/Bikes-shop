@@ -1,0 +1,12 @@
+<h2>Bikes</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngFor="let b of bikes">
+  <app-bike-card
+    [bike]="b"
+    [finalPrice]="finalPrice(b)"
+    (addToCart)="onAddToCart($event)"
+    (openDetails)="onOpenDetails($event)">
+  </app-bike-card>
+</div>

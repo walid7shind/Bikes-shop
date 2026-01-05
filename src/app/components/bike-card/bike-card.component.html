@@ -1,0 +1,19 @@
+<div [ngClass]="bike.discountPercent ? 'discounted' : ''">
+  <h3 (click)="onOpen()">{{ bike.name }}</h3>
+
+  <p>Category: {{ bike.category }}</p>
+
+  <p *ngIf="bike.discountPercent">
+    Discount: {{ bike.discountPercent }}%
+  </p>
+
+  <p>
+    Price: {{ finalPrice }} €
+  </p>
+
+  <button (click)="onAddClick()" [disabled]="bike.inStock <= 0">
+    Add to cart
+  </button>
+
+  <p *ngIf="bike.inStock <= 0">Out of stock</p>
+</div>
